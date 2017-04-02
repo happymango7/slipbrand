@@ -1,0 +1,5 @@
+			<% if current_user.last_campaign(result) %>
+				<a class="btn btn-default hasCampaign"><%= current_user.last_campaign(result).name %></a>
+			<% else %>
+				<a class="btn btn-default noCampaign">Not added, yet.</a>
+			<% end %>

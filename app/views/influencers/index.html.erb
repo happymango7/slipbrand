@@ -1,0 +1,35 @@
+<div class="influencers">
+	<div class="container">
+		<div class="featured">
+			<div class="title">
+				<h2>Featured Influencers</h2>
+			</div> 
+			<div class="list">
+				<%= render partial: "influencers/influencer", collection: @featured_influencers %>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="categories"> 
+			<div class="title">
+				<h2>Influencer Categories</h2> 
+			</div>
+			<div class="categoryList">
+				<% @categories.each do |category| %>
+					<%= link_to(category, :class => "categoryLink") do %>
+						<div class="category" style="background:url(<%= category.image.url(:small) %>);background-size: cover;background-position:center;">
+							<div class="overlay">
+								<div class="name">
+									<h2><%= category.name %></h2>
+								</div>
+								<div class="influencerCount">
+									<h4><%= category.influencers.count %> Influencers</h4>
+								</div>
+							</div>
+						</div>
+					<% end %>
+				<% end %>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+</div> 

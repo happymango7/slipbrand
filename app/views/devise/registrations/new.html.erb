@@ -1,0 +1,74 @@
+<% content_for :body_class, "class=form-background" %>
+<div class="container">
+  <div class="signupHero">
+    <div class="title">
+      <h2>Making influencer marketing<br /> affordable and easy</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <h4>Sign Up</h4>
+        <p>First, sign up and select what monthly plan you'd like to subscribe to.</p>
+      </div>
+      <div class="step">
+        <h4>Create a Campaign</h4>
+        <p>Next, create a campaign with us. Add a description, demographic, and select an industry.</p> 
+      </div>
+      <div class="step">
+        <h4>Find Influencers</h4>
+        <p>Based on your filters, select and contact influencers.</p>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="partners">
+      <div class="title">
+        <h2>Don't worry, you're in good company</h2>
+        <p>Join other companies looking to further compete in the market with influencer marketing.</p>
+      </div>
+      <div class="grid">
+        <ul class="logos">
+          <li><%= image_tag "paramount.png" %></li>
+          <li><%= image_tag "fox.png" %></li>
+          <li><%= image_tag "sony-pictures.png" %></li>
+          <li><%= image_tag "nba.png" %></li>
+          <li><%= image_tag "livenation.png" %></li>
+          <li><%= image_tag "meundies.png" %></li>
+        </ul>
+      </div>
+    </div> 
+  </div>
+  <div class="form" id="signup">
+    <div class="title">
+      <h2>Sign up to join Brandslip</h2> 
+    </div>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %> 
+      <div class="form-group">
+        <div class="field">
+          <%= f.text_field :first_name, :class => "form-control", :placeholder => "First Name" %>
+        </div>
+        <div class="field">
+          <%= f.text_field :last_name, :class => "form-control", :placeholder => "Last Name" %>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="field">
+        <%= f.email_field :email, :class => "form-control", :placeholder => "Email" %>
+      </div>
+      <div class="field">
+        <%= f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "Password (at least 6 characters)" %>
+      </div>
+      <div class="field">
+        <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control", :placeholder => "Password, again" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Sign up", :class => "btn btn-default" %>
+      </div>
+    <% end %>
+    <div class="agreement">
+      <p>* By continuing you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</p>
+    </div>
+    <div class="alternate">
+      <p>Already have an account? <%= link_to "Log in", new_user_session_path %></p>
+    </div>
+  </div>
+</div>

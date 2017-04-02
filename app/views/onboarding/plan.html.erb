@@ -1,0 +1,68 @@
+<% content_for :head do %>
+  <%= render 'payola/transactions/stripe_header' %>
+  <style type="text/css">
+  	body, html {
+  		background-color: #f6f6f6;
+  	}
+  </style>
+<% end %> 
+<div class="container">
+	<div class="onboarding">
+		<div class="branding">
+			<%= image_tag "blue-logo.png" %>
+		</div>
+		<div class="welcome">
+			<h1>Welcome to Brandslip. Let's get started.</h1>
+		</div>
+		<div class="form">
+			<div class="title">
+				<h1>Please enter your payment info</h1>
+				<p>Your card will be automatically charged after your 7 day trial expires.</p>
+			</div>
+			<div>
+          		<span id="error_explanation" class="payola-payment-error"></span>
+        	</div>
+			<div class="alert alert-info security" role="alert">
+				All transactions are encrypted and secured by <a href="http://stripe.com" target="_blank">Stripe</a>.
+			</div>
+			<%= form_tag('/plans',
+      			class: 'payola-onestep-subscription-form',
+      			'data-payola-base-path' => '/payola',
+      			'data-payola-plan-type' => @plan.plan_class,
+      			'data-payola-plan-id' => @plan.id 
+  				) do |f| %>
+  				<span class="payola-payment-error"></span>
+  				<div class="field">
+  					<label>Select Your Plan</label>
+  					<%= collection_select(:plan_id, :id, Plan.all.order("name ASC"), :id, :name, {}, {:class=>'form-control'}) %>
+  				</div>
+				<div class="field">
+					<%= text_field_tag :card_number, nil, name: nil, placeholder: "4242 4242 4242 4242", class: 'form-control', data: { stripe: 'number' } %>
+				</div>
+				<div class="lower">
+					<div class="field">
+					 <%= text_field_tag :card_code, nil, placeholder: "CVC (123)", name: nil, class: 'form-control', data: { stripe: 'cvc' } %>
+					</div>
+					<div class="field">
+					  <%= select_month nil, { use_two_digit_numbers: true}, { name: nil, data: { stripe: 'exp_month' }, class: "form-control select-field" } %>
+					  <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+10}, { name: nil, data: { stripe: 'exp_year' }, class: "form-control select-field" } %>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="field">
+	              <input
+	                type="text"
+	                class="coupon-code form-control"
+	                placeholder="Discount Code"
+	                data-payola="coupon"
+	                data-event-category="payment"
+	                data-event-action="payment_focus_discount">
+	              </input>
+            	</div>
+				<div class="submit">
+					<%= submit_tag "Next Step", :class => "btn btn-default green" %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>	

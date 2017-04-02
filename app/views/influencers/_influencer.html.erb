@@ -1,0 +1,35 @@
+<div class="influencer">
+	<div class="photo">
+		<%= link_to image_tag(influencer.avatar.url(:small)), influencer_path(influencer) %>
+	</div>
+	<div class="info">
+		<h4><%= link_to influencer.category.name, category_path(influencer.category) %></h4>
+		<h1><%= link_to influencer.name, influencer_path(influencer) %></h1>
+		<div class="stats">
+			<ul>
+				<% if influencer.instagram_follower_count? %>
+					<li><i class="fa fa-instagram" aria-hidden="true"></i><%= number_to_human(influencer.instagram_follower_count, precision: 1) %></li>
+				<% end %>
+				<% if influencer.twitter_follower_count? %>
+					<li><i class="fa fa-twitter" aria-hidden="true"></i><%= number_to_human(influencer.twitter_follower_count, precision: 1) %></li>
+				<% end %>
+				<% if influencer.youtube_subscribers_count? %>
+					<li><i class="fa fa-youtube" aria-hidden="true"></i><%= number_to_human(influencer.youtube_subscribers_count, precision: 1) %></li>
+				<% end %>
+			</ul>
+		</div>
+		<div class="add influencer-<%= influencer.id %>">
+			<% if current_user.campaigns.any? %>
+				<%= form_for(campaign_path(influencer), method: "post", :url => campaign_path(influencer), :remote => true) do |f| %>
+					<%= select_tag 'campaign_id', options_from_collection_for_select(current_user.campaigns, :id, :name), :class => "form-control" %>
+					<%= f.submit "Add to Campaign", :class => "btn btn-default addToCampaign blue" %>
+				<% end %>
+			<% else %>
+				<%= link_to "Create Campaign", new_campaign_path, :class => "btn btn-default addToCampaign blue" %>
+			<% end %>
+		</div>
+		<div class="added added-<%= influencer.id %>">
+			<div class="alert alert-success" role="alert"><strong><i class="fa fa-check-square" aria-hidden="true"></i></strong>Added.</div>
+		</div>
+	</div>	 
+</div>     

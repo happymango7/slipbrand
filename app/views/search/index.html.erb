@@ -1,0 +1,224 @@
+<% content_for :body_class, "class=influencers-background" %>
+<style type="text/css">
+  .navbar .nav-pills > li:nth-child(2) > a {
+    color: white !important;
+  }
+</style>
+<div class="container">
+  <div class="search">
+    <div class="filter">
+      <div class="title">
+        <h4>Filter Results</h4>
+      </div>
+      <div class="option">
+        <div class="title">
+          <h2>Category</h2> 
+        </div>
+        <div id="category" class="facet"></div>
+      </div>
+      <div class="option">
+        <div class="title">
+          <h2>Location</h2>
+        </div>
+        <div id="location" class="facet"></div>
+      </div>
+      <div class="option">
+        <div class="title">
+          <h2>International</h2>
+        </div>
+        <div id="international" class="facet"></div>
+      </div>
+      <div class="option">
+        <div class="title">
+          <h2>Multicultural</h2>
+        </div>
+        <div id="multicultural" class="facet"></div>
+      </div>
+      <div class="option">
+        <div class="title">
+          <h2>Gender</h2>
+        </div>
+        <div id="gender" class="facet"></div>
+      </div>
+      <div class="option">
+        <div class="title">
+          <h2>YouTube Subscribers</h2>
+        </div>
+        <div id="youtube_subs" class="facet"></div>
+      </div>
+      <div class="option">
+        <div class="title">
+          <h2>Instagram Followers</h2>
+        </div>
+        <div id="instagram" class="facet"></div>
+      </div>
+      <div class="option">
+        <div class="title">
+          <h2>Twitter Followers</h2>
+        </div>
+        <div id="twitter" class="facet"></div>
+      </div>
+    </div>
+    <div class="results">
+      <div id="hits"></div>
+      <div class="clearfix"></div>
+      <div id="pagination"></div>
+    </div>
+  </div>
+</div>
+
+<script src="//cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var hitTemplate = 
+    '<div class="result">' +
+      '<div class="image"><a href="http://brandslip.com/influencers/{{{objectID}}}"><img src="{{{_highlightResult.avatar.value}}}" /></a></div>' +
+      '<div class="info">' +
+        '<h4><a href="http://brandslip.com/category/{{{category.id}}}">{{{_highlightResult.category.name.value}}}</a></h4>' +
+        '<h1><a href="http://brandslip.com/influencers/{{{objectID}}}">{{{_highlightResult.name.value}}}</a></h1>' +
+        '<div class="stats">' +
+          '<ul>' +
+            '<li><i class="fa fa-instagram" aria-hidden="true"></i>{{{instagram_followers}}}</li>' +
+            '<li><i class="fa fa-twitter" aria-hidden="true"></i>{{{twitter_followers}}}</li>' +
+            '<li><i class="fa fa-youtube" aria-hidden="true"></i>{{{youtube_subscribers}}}</li>' +
+          '</ul>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+    
+    var search = instantsearch({
+      appId: 'P10EXU21PY',
+      apiKey: '4f36a7a9a7f5dccce41fbcc282061bd5',
+      indexName: '<%= Influencer.index_name %>',
+      urlSync: true
+    });
+
+    search.addWidget(
+      instantsearch.widgets.searchBox({
+        container: '#q',
+        placeholder: 'Search for influencers',
+        autofocus: false,
+        poweredBy: false
+      })
+    );
+
+    search.addWidget(
+      instantsearch.widgets.hits({
+        container: '#hits',
+        templates: {
+          empty: 'No results',
+          item: hitTemplate
+        },
+        hitsPerPage: 16
+      })
+    );
+
+    search.addWidget(
+      instantsearch.widgets.pagination({
+        container: '#pagination',
+        maxPages: 20,
+        scrollTo: false
+      })
+    );
+
+    search.addWidget(
+      instantsearch.widgets.refinementList({
+        container: '#location',
+        attributeName: 'location',
+        sortBy: ['isRefined', 'count:desc', 'name:asc'],
+        limit: 16,
+        operator: 'and',
+      })
+    );
+
+    search.addWidget(
+      instantsearch.widgets.refinementList({
+        container: '#category',
+        attributeName: 'category.name',
+        sortBy: ['isRefined', 'count:desc', 'name:asc'],
+        limit: 16,
+        operator: 'and',
+      })
+    );
+
+    search.addWidget(
+      instantsearch.widgets.refinementList({
+        container: '#gender',
+        attributeName: 'gender',
+        operator: 'and',
+        limit: 10,
+      })
+    );
+
+    search.addWidget(
+      instantsearch.widgets.toggle({
+        container: "#international", 
+        attributeName: "international",
+        label: 'International',
+        values: {
+          on: true,
+          off: false
+        },
+      })
+    );
+
+    search.addWidget(
+      instantsearch.widgets.numericSelector({
+        container: '#instagram',
+        attributeName: 'instagram_follower_count',
+        operator: '>=',
+        options: [
+          {label: 'Any', value: 0},
+          {label: 'Under 25,000', value: 25000},
+          {label: '25,001 - 100,000', value: 250001},
+          {label: '100,001 - 500,000', value: 100001},
+          {label: '500,001 - 1,000,00,000+', value: 500001}
+        ]
+      })
+    );
+
+    search.addWidget(
+      instantsearch.widgets.numericSelector({
+        container: '#twitter',
+        attributeName: 'twitter_follower_count',
+        operator: '>=',
+        options: [
+          {label: 'Any', value: 0},
+          {label: 'Under 25,000', value: 25000},
+          {label: '25,001 - 100,000', value: 250001},
+          {label: '100,001 - 500,000', value: 100001},
+          {label: '500,001 - 1,000,00,000+', value: 500001}
+        ]
+      })
+    );
+
+    search.addWidget(
+      instantsearch.widgets.numericSelector({
+        container: '#youtube_subs',
+        attributeName: 'youtube_subscribers_count',
+        operator: '>=',
+        options: [
+          {label: 'Any', value: 0},
+          {label: 'Under 25,000', value: 25000},
+          {label: '25,001 - 100,000', value: 250001},
+          {label: '100,001 - 500,000', value: 100001},
+          {label: '500,001 - 1,000,00,000+', value: 500001}
+        ]
+      })
+    );
+
+    search.addWidget(
+      instantsearch.widgets.toggle({
+        container: "#multicultural", 
+        attributeName: "multicultural",
+        label: 'Multicultural',
+        values: {
+          on: true,
+          off: false
+        },
+      })
+    );
+
+    search.start();
+  });
+</script>

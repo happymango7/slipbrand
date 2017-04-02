@@ -1,0 +1,176 @@
+<style type="text/css">
+	footer {
+		margin-top: 0;
+	}
+</style> 
+<div class="top">
+	<div class="overlay">
+		<div class="container">
+			<div class="navigation">    
+				<div class="logo">
+					<%= link_to image_tag("logo.png"), root_path %>
+				</div>
+				<div class="headerSearch"> 
+	          		<%= form_tag search_path, method: :get do %>
+	            		<%= text_field_tag :query, params[:query], :placeholder => "search for influencers", :class => "form-control" %>
+	        		<% end %>
+        		</div>
+				<div class="menu">
+					<ul class="nav nav-pills">
+						<% if user_signed_in? %> 
+			                <li><%= active_link_to "Campaigns", campaigns_path %></li>
+			                <li><a href="/discover">Discover</a></li>
+			                <li><%= active_link_to "Influencers", influencers_path %></li>
+			                <li><%= active_link_to "Account", edit_user_registration_path %></li>
+			                <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+            			<% else %>
+			                <li role="presentation"><%= link_to "Home", root_path %></li>
+			                <li role="presentation"><%= link_to "Contact", contact_path %></li>
+			                <li role="presentation"><%= link_to "Privacy", privacy_path %></li>
+			                <li role="presentation"><%= link_to "Terms", terms_path %></li>
+			                <li role="presentation"><%= link_to "Security", security_path %></li>
+			                <li role="presentation"><%= link_to "Log In", new_user_session_path %></li>
+			                <li role="presentation"><%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-default" %></li>
+            			<% end %> 
+					</ul>
+				</div>
+			</div> 
+			<div class="search">  
+				<div class="tagline">
+					<h2>Search. Select. Connect.</h2>
+					<p>Brandslip is a search engine that helps brands connect<br /> with social media influencers more efficiently.</p>
+				</div>
+				<div class="platforms">
+					<ul class="nav nav-pills"> 
+					  <li role="presentation"><a href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
+					  <li role="presentation"><a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+					  <li role="presentation"><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+					  <li role="presentation"><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+					  <li role="presentation"><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+					  <li role="presentation"><a href="#"><i class="fa fa-snapchat-square" aria-hidden="true"></i></a></li>
+					</ul>
+				</div>
+				<div class="getStarted">
+					<p>* Starting at $19.99/month</p>
+					<%= link_to "Start Your Free 3 Day Trial", new_user_registration_path, :class => "btn btn-default green" %>
+				</div> 
+			</div>
+		</div>
+	</div>
+</div> 
+<div class="section" id="brands">
+	<div class="container">
+		<div class="title">
+			<h2>Trusted By</h2>
+		</div>
+		<ul class="logos">
+	      <li><%= image_tag "paramount.png" %></li>
+	      <li><%= image_tag "fox.png" %></li>
+	      <li><%= image_tag "sony-pictures.png" %></li>
+	      <li><%= image_tag "nba.png" %></li>
+	      <li><%= image_tag "livenation.png" %></li>
+	      <li><%= image_tag "music-choice.png" %></li>
+	    </ul>
+	</div>
+</div>
+<div class="section" id="features">
+	<div class="container">
+		<div class="features">
+			<div class="feature" id="search">
+				<div class="title">
+					<h1><i class="fa fa-search" aria-hidden="true"></i>Search</h1>
+				</div>
+				<div class="content">
+					<p>Sign up and select a package. Once you’ve selected a package, you can search through our trusted database of over 100,000 influencers.</p>
+				</div>
+			</div>
+			<div class="feature" id="select">
+				<div class="title">
+					<h1><i class="fa fa-plus" aria-hidden="true"></i>Select</h1>
+				</div>
+				<div class="content">
+					<p>Select influencers that align with your brand by location, age, and platform. We have influencers on Instagram, Facebook, Snapchat, Twitter, Linkedin and Pinterest.</p>
+				</div>
+			</div>
+			<div class="feature" id="connect">
+				<div class="title">
+					<h1><i class="fa fa-connectdevelop" aria-hidden="true"></i>Connect</h1>
+				</div>
+				<div class="content">
+					<p>We make it easy for you to select and message the perfect influencers for your brand! Contact influencers directly from the Brandslip platform.</p>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+<div class="section" id="international">
+	<div class="container">
+		<div class="title">
+			<h1><i class="fa fa-globe" aria-hidden="true"></i>Go International</h1>
+			<p>The Brandslip platform provides influencers from all backgrounds, including Multi-cultural and international stars on the web.</p>
+		</div>
+		<div class="title">
+			<h1><i class="fa fa-id-badge" aria-hidden="true"></i>Micro influencers</h1>
+			<p>We have the largest network of micro-influencers. Micro-influencers are everyday social media users with less than 15k followers.</p>
+		</div>
+	</div>
+</div>
+<div class="section" id="pricing">
+	<div class="container">
+		<div class="title">
+			<h4>Pricing</h4>
+			<p>Making influencer marketing affordable and easy.</p>
+		</div>
+		<div class="plans">
+			<div class="plan">
+				<div class="name">
+					<h2>Basic</h2>
+				</div>
+				<div class="price">
+					<sup>$</sup>
+                    <strong>19.99</strong>
+                    <em>/ month</em><br />
+				</div>
+				<div class="description">
+					<p>You'll have access to influencers with 25,000 followers and under.</p>
+				</div>
+				<div class="getStarted">
+					<%= link_to "Get Started", new_user_registration_path, :class => "btn btn-default" %>
+				</div>
+			</div>
+			<div class="plan">
+				<div class="name">
+					<h2>Premium</h2>
+				</div>
+				<div class="price">
+					<sup>$</sup>
+                    <strong>29.99</strong>
+                    <em>/ month</em><br />
+				</div>
+				<div class="description">
+					<p>You'll have access to influencers with 150,000 followers and under.</p>
+				</div>
+				<div class="getStarted">
+					<%= link_to "Get Started", new_user_registration_path, :class => "btn btn-default" %>
+				</div>
+			</div>
+			<div class="plan">
+				<div class="name">
+					<h2>Platinum</h2>
+				</div>
+				<div class="price">
+					<sup>$</sup>
+                    <strong>49.99</strong>
+                    <em>/ month</em><br />
+				</div>
+				<div class="description">
+					<p>You'll have access to the entire network of influencers.</p>
+				</div>
+				<div class="getStarted">
+					<%= link_to "Get Started", new_user_registration_path, :class => "btn btn-default" %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

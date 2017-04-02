@@ -1,0 +1,18 @@
+<div class="container">
+	<div class="form newCampaign">
+		<%= form_for(@campaign) do |f| %>
+			<div class="title">
+				<h2>Create a New Campaign</h2>
+			</div>
+			<div class="field">
+				<%= f.text_field :name, :class => "form-control", :placeholder => "Campaign Name" %>
+			</div>
+			<div class="field">
+				<%= f.text_area :description, :class => "form-control", :placeholder => "Campaign Description", :rows => 5 %>
+			</div>
+			<div class="actions">
+				<%= f.submit "Update Campaign", :class => "btn btn-default" %>
+			</div>
+		<% end %>	
+	</div>
+</div> 

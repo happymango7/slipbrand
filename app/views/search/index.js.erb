@@ -1,0 +1,5 @@
+<% js = escape_javascript(
+  render(partial: 'search/result',  collection: @influencers)
+) %>
+$(".results").html("<%= js %>");
+$(".title h4").html("Filter results (<%= @influencers.count %>)")

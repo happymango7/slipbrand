@@ -1,0 +1,41 @@
+<div class="container">
+	<div class="campaignView">
+		<div class="info">
+			<div class="name">
+				<h3><%= @campaign.name %></h3>
+			</div>
+			<div class="description">
+				<p><%= @campaign.description %></p>
+			</div>
+			<div class="company-name">
+				<h4><%= @campaign.user.company_name %></h4>
+			</div>
+			<div class="editCampaign">
+				<%= link_to "Edit Campaign", edit_campaign_path(@campaign), :class => "btn btn-default blue" %>
+			</div>
+			<div class="removeCampaign">
+				<%= link_to "Delete Campaign", @campaign, :class => "btn btn-default green", method: :delete, data: { confirm: "You sure?"}, title: @campaign.name %>
+			</div>
+		</div>
+		<div class="influencerList">
+			<div class="upper">
+				<div class="title">
+					<h2>Influencers</h2>
+				</div>
+				<a href="/discover?utf8=✓&filterrific%5Bsearch_query%5D=" class="btn btn-default blue">Add Influencers</a>
+				<div class="clearfix"></div>
+			</div>
+			<% if @campaign.influencers.any? %>
+				<div class="addedInfluencers">
+					<%= render partial: "influencers/added", collection: @influencers %>
+					<div class="clearfix"></div>
+				</div>
+			<% else %>
+				<div class="empty">
+					<p>You haven't added any influencers to this campaign yet.</p>
+				</div>
+			<% end %>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>   

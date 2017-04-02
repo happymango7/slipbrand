@@ -1,0 +1,36 @@
+<div class="influencer">
+	<div class="photo">
+		<%= link_to image_tag(added.avatar.url(:small)), influencer_path(added) %>
+	</div>
+	<div class="influencerInfo">
+		<h4><%= link_to added.category.name, category_path(added.category) %></h4>
+		<h1><%= link_to added.name, influencer_path(added) %></h1>
+		<div class="remove">
+		<%= link_to "Remove from Campaign", remove_influencer_campaign_path(@campaign, added) %>
+		</div>
+		<div class="add">
+			<% if @campaign.messages.exists?(influencer_id: added.id) %>
+				<div class="alert alert-success added" role="alert"><strong><i class="fa fa-check-square" aria-hidden="true"></i></strong>Contacted.</div>
+			<% else %>
+				<a href="mailto:<%= added.email %>" id="reachOut-<%= added.id %>" class="btn btn-default blue">Contact</a>
+				<div class="alert alert-success alert-<%= added.id %>" role="alert"><strong><i class="fa fa-check-square" aria-hidden="true"></i></strong>Contacted.</div>
+			<% end %>
+		</div>
+	</div>	
+</div> 
+<script type="text/javascript">
+	$("#reachOut-<%= added.id %>").click(function() {
+    	return $.ajax({
+	      type: "POST",
+	      url: "/campaigns/<%= @campaign.id %>/message/<%= added.id %>",
+	      
+	      success: function(data) {
+	        return false;
+	      },
+	      error: function(data) {
+	      	alert("Oops. There was an error. We're looking into it.");
+	        return false;
+	      }
+	    });
+	});
+</script>   

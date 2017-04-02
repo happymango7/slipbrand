@@ -1,0 +1,22 @@
+<div class="container">
+	<div class="categories">
+		<div class="title">
+			<h2>Influencer Categories</h2>
+		</div>
+		<div class="categoryList">
+			<% @categories.each do |category| %>
+				<%= link_to(category, :class => "categoryLink") do %>
+					<div class="category">
+						<div class="name">
+							<h2><%= category.name %></h2>
+						</div>
+						<div class="influencerCount">
+							<h4><%= category.influencers.count %> Influencers</h4>
+						</div>
+					</div>
+				<% end %>
+			<% end %>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div> 

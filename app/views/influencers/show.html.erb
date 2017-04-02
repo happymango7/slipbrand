@@ -1,0 +1,124 @@
+<div class="container">	
+	<div class="profile">
+		<div class="sidebar">
+			<div class="profilePicture">
+				<%= image_tag @influencer.avatar.url(:small) %>
+			</div>
+			<div class="name">
+				<h2><%= @influencer.name %></h2>
+			</div>
+			<div class="location">
+				<h4><%= @influencer.location %></h4>
+			</div>
+			<div class="description"> 
+				<p><%= @influencer.description %></p>
+			</div>
+			<% if @influencer.multicultural %>
+				<div class="multicultural">
+					<a href="#" class="btn btn-default">MULTICULTURAL</a>
+				</div>
+			<% end %>
+			<div class="category"> 
+				<%= link_to @influencer.category.name, category_path(@influencer.category), :class => "btn btn-default" %>
+			</div> 
+			<div class="actions">
+				<a href="mailto:<%= @influencer.email %>" id="reachOut" class="btn btn-default contact">Contact</a>
+				<% if current_user.campaigns.any? %>
+					<%= form_for(campaign_path(@influencer), method: "post", :url => campaign_path) do |f| %>
+						<label>Add to Campaign</label>
+						<%= select_tag 'campaign_id', options_from_collection_for_select(current_user.campaigns, :id, :name), :class => "form-control" %>
+						<%= f.submit "Add to Campaign", :class => "btn btn-default addToCampaign blue" %>
+					<% end %> 
+				<% else %>
+					<%= link_to "Create Campaign", new_campaign_path, :class => "btn btn-default addToCampaign blue" %>
+				<% end %>
+			</div> 
+			<div class="networks"> 
+				<ul class="nav nav-pills nav-stacked">
+					<% if @influencer.instagram_username? %>
+						<li><a href="http://instagram.com/<%= @influencer.instagram_username %>" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i><%= number_to_human(@influencer.instagram_follower_count, precision: 1) %> Instagram</a></li>
+					<% end %>
+					<% if @influencer.twitter_username? %>
+						<li><a href="http://twitter.com/<%= @influencer.twitter_username %>" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i><%= number_to_human(@influencer.twitter_follower_count, precision: 1) %> Twitter</a></li>
+					<% end %>
+					<% if @influencer.youtube_username? %>
+						<li><a href="http://youtube.com/users/<%= @influencer.youtube_username %>" target="_blank"><i class="fa fa-youtube-play" aria-hidden="true"></i><%= number_to_human(@influencer.youtube_subscribers_count, precision: 1) %> YouTube</a></li>
+					<% end %>
+					<% if @influencer.snapchat_username? %>
+						<li><a href="http://snapchat.com/add/<%= @influencer.snapchat_username %>" target="_blank"><i class="fa fa-snapchat-square" aria-hidden="true"></i>Snapchat</a></li>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+		<div class="content">
+			<% if @influencer.instagram_username? %>
+				<div class="instagram">
+					<div class="title">
+						<h2>Instagram</h2>
+					</div>
+					<div class="photos">
+						<% @instagram_posts.each do |post| %>
+							<div class="photo">
+								<% if post["is_video"] == true %>
+									<%= image_tag post["thumbnail_src"] %>
+								<% else %>
+									<%= image_tag post["display_src"] %>
+								<% end %>
+							</div>
+						<% end %>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			<% end %>
+			<% if @influencer.twitter_username? %>
+				<% if @tweets.any? %>
+					<div class="twitter">
+						<div class="title">
+							<h2>Twitter</h2>
+						</div>
+						<div class="tweets">
+							<% @tweets.each do |tweet| %>
+								<div class="tweet">
+									<div class="copy">
+										<h1><%= tweet.text %></h1>
+									</div>
+									<div class="response">
+										<p><%= tweet.favorite_count %> Favorites — <%= tweet.retweet_count %> Retweets</p>
+									</div>
+									<div class="user">
+										<div class="avatar">
+											<%= image_tag tweet.user.profile_image_uri %>
+										</div>
+										<div class="username">
+											<h4>@<%= tweet.user.screen_name %></h4>
+										</div>
+									</div>
+								</div>
+							<% end %>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				<% end %>
+			<% end %>
+			<% if @influencer.youtube_username? %>
+				<div class="youtube">
+					<div class="title">
+						<h2>YouTube</h2>
+					</div>
+					<div class="videos">
+						<% if @videos.any? %>
+							<% @videos.each do |video| %>
+								<a href="https://www.youtube.com/watch?v=<%= video.id %>" target="_blank" class="video">
+		 							<div class="videoImage">
+										<%= image_tag video.thumbnail_url(size = :high) %>
+									</div>
+								</a>
+							<% end %>
+						<% end %>
+					</div>
+				</div>
+			<% end %>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div> 

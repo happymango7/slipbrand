@@ -1,0 +1,36 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+      <% if user_signed_in? %>
+        <%= link_to image_tag("logo.png"), campaigns_path, :class => "navbar-brand" %>
+      <% else %>
+        <%= link_to image_tag("logo.png"), root_path, :class => "navbar-brand" %>
+      <% end %>
+      <% if user_signed_in? %> 
+        <div class="headerSearch">
+           <%= form_tag("/search", method: "get") do %>
+            <%= text_field_tag :q, nil, placeholder:'search for influencers', class: "form-control" %>
+          <% end %>
+        </div>
+      <% end %> 
+      <div class="menu">
+        <ul class="nav nav-pills"> 
+            <% if user_signed_in? %> 
+                <li><%= active_link_to "Campaigns", campaigns_path %></li>
+                <li><a href="/discover">Discover</a></li>
+                <li><%= active_link_to "Influencers", influencers_path %></li>
+                <li><%= active_link_to "Account", edit_user_registration_path %></li>
+                <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+            <% else %>
+                <li role="presentation"><%= link_to "Home", root_path %></li>
+                <li role="presentation"><%= link_to "Contact", contact_path %></li>
+                <li role="presentation"><%= link_to "Privacy", privacy_path %></li>
+                <li role="presentation"><%= link_to "Terms", terms_path %></li>
+                <li role="presentation"><%= link_to "Security", security_path %></li>
+                <li role="presentation"><%= link_to "Log In", new_user_session_path %></li>
+                <li role="presentation"><%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-default" %></li>
+            <% end %> 
+        </ul>
+      </div>
+    </div>
+  </div> 
+</nav>       

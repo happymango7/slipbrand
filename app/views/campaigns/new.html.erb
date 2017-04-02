@@ -1,0 +1,65 @@
+<% unless current_user.campaigns.any? %>
+	<div class="intro">
+		<div class="content">
+			<div class="hero">
+				<ul>
+					<li>
+						<div class="logo">
+							<%= image_tag "blue-logo.png" %>
+						</div>
+						<div class="copy">	
+							<p>Brandslip aims to make it easier for you to search for and contact influencers. You can save influencers to different lists or campaigns to determine which influencers make sense for whatever projects you are working on.</p>
+						</div>
+					</li>
+					<li>
+						<div class="logo">
+							<%= image_tag "blue-logo.png" %>
+						</div>
+						<div class="copy">
+							<p>Micro-influencers typically are more affordable for the average brand and may even be willing to create content for your brand in exchange for free products/services. Micro-influencers can help boost your brand's social media presence as well as provide your brand.</p>
+						</div>
+					</li>
+					<li>
+						<div class="logo">
+							<%= image_tag "blue-logo.png" %>
+						</div>
+						<div class="copy">
+							<p>Our search engine makes it easy for brands to search for influencers by location, category, social media platform and follower count. We also provide basic social analytics of influencers.</p>
+						</div>
+						<div class="getStarted">
+							<a href="#" class="btn btn-default green" id="close">Get Started!</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+<% end %>
+<div class="container">
+	<div class="form newCampaign">
+		<%= form_for(@campaign) do |f| %>
+			<div class="title">
+				<h2>Create a New Campaign</h2>
+			</div>
+			<div class="field">
+				<%= f.text_field :name, :class => "form-control", :placeholder => "Campaign Name" %>
+			</div>
+			<div class="field">
+				<%= f.text_area :description, :class => "form-control", :placeholder => "Campaign Description", :rows => 5 %>
+			</div>
+			<div class="actions">
+				<%= f.submit "Create Campaign", :class => "btn btn-default" %>
+			</div>
+		<% end %>	
+	</div>
+</div> 
+
+<script>
+	jQuery(document).ready(function($) {
+		$('.hero').unslider();
+
+		$('#close').on('click', function(e) {
+	        $(".intro").fadeOut(500);
+	    });
+	});
+</script>

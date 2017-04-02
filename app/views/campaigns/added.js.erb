@@ -1,0 +1,11 @@
+$(".influencer-<%= @influencer.id %>").hide();
+$(".added-<%= @influencer.id %>").fadeIn(500);
+
+
+$('.added-<%= @influencer.id %>').fadeIn(500, function() {
+    $('.added-<%= @influencer.id %>').delay(1000).fadeOut(500, function() {
+    	$(".influencer-<%= @influencer.id %>").show();
+    });
+});
+
+$(".campaign-<%= @influencer.id %>").html("<%= escape_javascript(render('search/added', :result => @influencer)) %>")

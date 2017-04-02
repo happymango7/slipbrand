@@ -1,0 +1,27 @@
+<% content_for :body_class, "class=campaigns-background" %>
+<div class="container">
+	<div class="campaigns">
+		<% if @campaigns.empty? %>
+			<div class="alert alert-info" role="alert">
+				<strong>Welcome!</strong> Create a campaign below to get started using the Brandslip platform.
+			</div>
+		<% end %>
+		<div class="title">
+			<h2>Recent Campaigns</h2>
+			<div class="create">
+				<%= link_to "Create Campaign", new_campaign_path, :class => "btn btn-default" %>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="campaignsPanel">
+			<% if @campaigns.any? %>
+				<%= render partial: "campaigns/campaign", collection: @campaigns %>
+				<div class="clearfix"></div>
+			<% else %>
+				<div class="empty">
+					<h2>No Campaigns Yet</h2>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div> 

@@ -1,0 +1,58 @@
+<style type="text/css">
+	html, body {
+		background: url(../assets/influencer-bg.jpeg);
+		background-size: cover;
+		background-attachment: fixed;	
+	}
+</style> 
+<div class="container">
+	<div class="col-md-6 influencerSignup"> 
+		<%= form_for(@influencer) do |f| %>
+			<div class="title">
+				<h2>Are you an influencer?</h2>
+				<p>Apply Now to have a chance to be apart of the Brandslip influencer database! Receive free products and paid opportunities from cool brands of all sizes! </p>
+			</div>
+			<div class="fields">
+				<div class="form-group">
+					<%= f.label :name %>
+					<%= f.text_field :name, :placeholder => "Your Name", :class => "form-control" %>
+				</div>
+				<div class="form-group">
+					<%= f.label :email %>
+					<%= f.email_field :email, :placeholder => "Your Email", :class => "form-control" %>
+				</div>
+				<div class="form-group">
+					<%= f.label :gender %>
+					<%= f.select :gender, %w{ Male Female }, {}, {:class => 'form-control'}  %>
+				</div>
+				<div class="form-group">
+					<%= f.label :location %>
+					<%= f.text_field :location, :placeholder => "Where do you live?", :class => "form-control" %>
+				</div>
+				<div class="form-group">
+					<%= f.label :description %>
+					<%= f.text_area :description, :placeholder => "How would you describe yourself?", :class => "form-control" %>
+				</div>
+				<div class="form-group">
+					<%= f.label :instagram_username %>
+					<%= f.text_field :instagram_username, :placeholder => "Enter your Instagram username", :class => "form-control" %>
+				</div>
+				<div class="form-group">
+					<%= f.label :twitter_username %>
+					<%= f.text_field :twitter_username, :placeholder => "Enter your Twitter username", :class => "form-control" %>
+				</div>
+				<div class="form-group">
+					<%= f.label :snapchat_username %>
+					<%= f.text_field :snapchat_username, :placeholder => "Enter your Snapchat username", :class => "form-control" %>
+				</div>
+				<div class="form-group">
+					<%= f.label :youtube_username %>
+					<%= f.text_field :youtube_username, :placeholder => "Enter your YouTube username", :class => "form-control" %>
+				</div>
+				<div class="form-group">
+					<%= f.submit "Sign Up", :class => "btn btn-default blue" %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

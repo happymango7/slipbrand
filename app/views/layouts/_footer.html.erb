@@ -1,0 +1,37 @@
+<footer>
+	<div class="container">
+		<div class="logo">
+			 <%= link_to image_tag("blue-logo.png"), root_path %>
+		</div>
+		<div class="social">
+			<ul class="nav nav-pills">
+			  <li role="presentation"><a href="https://www.facebook.com/brandslip"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+			  <li role="presentation"><a href="https://twitter.com/brandslip" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+			  <li role="presentation"><a href="https://www.instagram.com/brandslip/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+			</ul>
+		</div>
+		 <div class="menu">
+	        <ul class="nav nav-pills">
+				<% if user_signed_in? %> 
+		            <li><%= active_link_to "Campaigns", campaigns_path %></li>
+		            <li><%= active_link_to "Influencers", influencers_path %></li>
+		            <li><%= active_link_to "Account", edit_user_registration_path %></li>
+		           	<li role="presentation"><%= link_to "Contact", contact_path %></li>
+		           	<li role="presentation"><%= link_to "Privacy", privacy_path %></li>
+		            <li role="presentation"><%= link_to "Terms", terms_path %></li>
+		            <li role="presentation"><%= link_to "Security", security_path %></li>
+		            <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+		        <% else %>
+		            <li role="presentation"><%= link_to "Home", root_path %></li>
+		            <li role="presentation"><%= link_to "Contact", contact_path %></li>
+		            <li role="presentation"><%= link_to "Privacy", privacy_path %></li>
+		            <li role="presentation"><%= link_to "Terms", terms_path %></li>
+		            <li role="presentation"><%= link_to "Security", security_path %></li>
+		            <li role="presentation"><%= link_to "Log In", new_user_session_path %></li>
+		            <li role="presentation"><%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-default" %></li>
+		        <% end %>  
+	        </ul>
+	    </div>
+	    <div class="clearfix"></div>
+	</div>
+</footer>     
