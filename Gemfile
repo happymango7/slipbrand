@@ -18,7 +18,7 @@ gem 'aws-sdk', '< 2.0'
 gem 'active_link_to'
 gem 'twitter' 
 gem 'wicked'
-gem "administrate", "~> 0.3.0"
+gem "administrate", "~> 0.13.0"
 gem 'payola-payments'
 gem 'filterrific', :git => "https://github.com/patrocc6/filterrific.git", :branch => "fix-param-permit"
 gem 'postmark-rails'
